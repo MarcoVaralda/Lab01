@@ -23,8 +23,19 @@ public class Parole {
 		listaParole.clear();
 	}
 	
+	public void cancellaParola(String s) {
+		listaParole.remove(s);
+	}
+	
+	
 	public int getSize() {
 		return listaParole.size();
+	}
+	
+	public boolean contiene(String s) {
+		if(listaParole.contains(s))
+			return true;
+		return false;
 	}
 
 }
