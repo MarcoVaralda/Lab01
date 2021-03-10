@@ -18,16 +18,24 @@ public class FXMLController {
 
     @FXML
     private ResourceBundle resources;
+    
     @FXML
     private URL location;
+    
     @FXML
     private TextField txtParola;
+    
     @FXML
     private Button btnInserisci;
+    
     @FXML
     private TextArea txtResult;
+    
     @FXML
     private Button btnReset;
+    
+    @FXML
+    private TextField txtTempoLinkedList;
 
     @FXML
     void doInsert(ActionEvent event) {
@@ -47,6 +55,9 @@ public class FXMLController {
 
     	txtResult.setText(risultato);
     	txtParola.setText("");
+    	
+    	/*String tempo = ""+System.nanoTime();
+    	txtTempoLinkedList.setText(tempo);*/
     }
 
     @FXML
@@ -55,13 +66,18 @@ public class FXMLController {
     	txtResult.setText("");
     	elenco.reset();
     	listaParole.clear();
+    	
+    	/*String tempo = ""+System.nanoTime();
+    	txtTempoLinkedList.setText(tempo);*/
     }
     
     @FXML
     void handleCancella(ActionEvent event) {
-    	String parolaInserita = txtParola.getText();
-    	if(listaParole.contains(parolaInserita))
-    		elenco.cancellaParola(parolaInserita);
+    	
+    	String daCancellare = txtResult.getSelectedText();
+    	
+    	if(listaParole.contains(daCancellare))
+    		elenco.cancellaParola(daCancellare);
     	
     	listaParole = new LinkedList<String>(elenco.getElenco());
     	String risultato = "";
@@ -71,14 +87,19 @@ public class FXMLController {
 
     	txtResult.setText(risultato);
     	txtParola.setText("");
+    	
+    	/*String tempo = ""+System.nanoTime();
+    	txtTempoLinkedList.setText(tempo);*/
     }
 
     @FXML
     void initialize() {
-        assert txtParola != null : "fx:id=\"txtParola\" was not injected: check your FXML file 'Scene.fxml'.";
+    	assert txtParola != null : "fx:id=\"txtParola\" was not injected: check your FXML file 'Scene.fxml'.";
         assert btnInserisci != null : "fx:id=\"btnInserisci\" was not injected: check your FXML file 'Scene.fxml'.";
         assert txtResult != null : "fx:id=\"txtResult\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert txtTempoLinkedList != null : "fx:id=\"txtTempoLinkedList\" was not injected: check your FXML file 'Scene.fxml'.";
         assert btnReset != null : "fx:id=\"btnReset\" was not injected: check your FXML file 'Scene.fxml'.";
+
         elenco = new Parole() ;
     }
 }
