@@ -49,7 +49,7 @@
                <children>
                   <Button mnemonicParsing="false" onAction="#handleCancella" text="Cancella">
                      <HBox.margin>
-                        <Insets left="200.0" />
+                        <Insets left="250.0" />
                      </HBox.margin>
                   </Button>
                </children>

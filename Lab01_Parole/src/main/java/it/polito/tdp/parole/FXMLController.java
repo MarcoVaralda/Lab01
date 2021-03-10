@@ -1,7 +1,6 @@
 package it.polito.tdp.parole;
 
 import java.net.URL;
-import java.util.LinkedList;
 import java.util.ResourceBundle;
 
 import it.polito.tdp.parole.model.Parole;
@@ -14,7 +13,6 @@ import javafx.scene.control.TextField;
 public class FXMLController {
 
 	Parole elenco ;
-	LinkedList<String> listaParole;
 
     @FXML
     private ResourceBundle resources;
@@ -46,15 +44,10 @@ public class FXMLController {
     	start=System.nanoTime();
     	
     	String parolaInserita = txtParola.getText();
-    	if(elenco.contiene(parolaInserita)) {
-    		txtParola.setText("");
-    		return;
-    	}
     	elenco.addParola(parolaInserita);
-
-    	listaParole = new LinkedList<String>(elenco.getElenco());    	
+ 	
     	String risultato = "";
-    	for(String s : listaParole) {
+    	for(String s : elenco.getElenco()) {
     		risultato = risultato + s+"\n";
     	}
 
@@ -75,7 +68,6 @@ public class FXMLController {
     	
     	txtResult.setText("");
     	elenco.reset();
-    	listaParole.clear();
     	
     	stop=System.nanoTime();    	
     	txtTempoLinkedList.setText((stop-start)+" nanosecondi");
@@ -91,12 +83,11 @@ public class FXMLController {
     	
     	String daCancellare = txtResult.getSelectedText();
     	
-    	if(listaParole.contains(daCancellare))
+    	if(elenco.contiene(daCancellare))
     		elenco.cancellaParola(daCancellare);
     	
-    	listaParole = new LinkedList<String>(elenco.getElenco());
     	String risultato = "";
-    	for(String s : listaParole) {
+    	for(String s : elenco.getElenco()) {
     		risultato = risultato + s+"\n";
     	}
 
@@ -106,6 +97,10 @@ public class FXMLController {
     	stop=System.nanoTime();    	
     	txtTempoLinkedList.setText((stop-start)+" nanosecondi");
     }
+    
+    // Confronto tempi con LinkedList e ArrayList:
+    // Tempo per inserie la parola ciao con LinkedList = 2.1498 milioni di nanosecondi
+    // Tempo per inserie la parola ciao con ArrayList = 1.910 milioni di nanosecondi
 
     @FXML
     void initialize() {
